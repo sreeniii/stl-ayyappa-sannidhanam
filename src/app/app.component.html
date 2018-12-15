@@ -21,6 +21,7 @@
       <app-menu></app-menu>
     </mat-sidenav>
     <mat-sidenav-content>
+      <app-alert></app-alert>
       <router-outlet></router-outlet>
     </mat-sidenav-content>
   </mat-sidenav-container>
@@ -29,6 +30,7 @@
     <ng-template matMenuContent>
       <button mat-menu-item>Settings</button>
       <button mat-menu-item>Help</button>
+      <button mat-menu-item (click)="logout()">Logout</button>
     </ng-template>
   </mat-menu>
 
