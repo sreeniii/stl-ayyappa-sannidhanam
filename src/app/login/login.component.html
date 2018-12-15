@@ -22,8 +22,9 @@
         <tr>
           <td>
             <mat-spinner [style.display]="loading ? 'block' : 'none'" class="example-icon"></mat-spinner>
-            <mat-card-actions>
+            <mat-card-actions class="example-full-width">
               <button mat-raised-button type="submit" [disabled]="loading" color="primary">Login</button>
+              <a routerLink="/register" class="btn btn-link">Register</a>
             </mat-card-actions>
           </td>
         </tr>

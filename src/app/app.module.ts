@@ -15,7 +15,6 @@ import { MatToolbarModule, MatButtonModule,
   MatSortModule, MatFormFieldModule, MatProgressSpinnerModule, MatInputModule } from '@angular/material';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DataGridComponent } from './data-grid/data-grid.component';
-import { RouterModule, Routes } from '@angular/router';
 import { EventsComponent } from './events/events.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
@@ -23,20 +22,11 @@ import { AlertComponent } from './alert/alert.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './helpers/jwt.interceptor';
 import { ErrorInterceptor } from './helpers/error.interceptor';
-import { AuthGuard } from './guards/auth.guard';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UsersComponent } from './users/users.component';
-
-const appRoutes: Routes = [
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]  },
-  { path: 'events', component: EventsComponent, canActivate: [AuthGuard]  },
-  { path: 'users', component: UsersComponent, canActivate: [AuthGuard]  },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-
-  // otherwise redirect to home
-  { path: '**', redirectTo: '' }
-];
+import {FlexLayoutModule} from '@angular/flex-layout';
+import { AboutusComponent } from './aboutus/aboutus.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +38,9 @@ const appRoutes: Routes = [
     RegisterComponent,
     LoginComponent,
     AlertComponent,
-    UsersComponent
+    UsersComponent,
+    AboutusComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +48,6 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    RouterModule.forRoot(appRoutes),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     LayoutModule,
     MatToolbarModule,
@@ -72,7 +63,8 @@ const appRoutes: Routes = [
     MatSortModule,
     MatFormFieldModule,
     MatProgressSpinnerModule,
-    MatInputModule
+    MatInputModule,
+    FlexLayoutModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

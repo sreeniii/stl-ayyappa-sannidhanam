@@ -12,7 +12,7 @@ import { AuthenticationService } from './services/authentication.service';
 })
 export class AppComponent {
   title = 'stl-ayyappa-sannidhanam';
-  currentToken: string;
+  userAuthenticated = false;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -22,7 +22,7 @@ export class AppComponent {
   constructor(private breakpointObserver: BreakpointObserver,
     private router: Router,
     private authenticationService: AuthenticationService) {
-    this.authenticationService.currentToken.subscribe(x => this.currentToken = x);
+    this.authenticationService.currentToken.subscribe(x => this.userAuthenticated = (x != null));
   }
 
   logout() {

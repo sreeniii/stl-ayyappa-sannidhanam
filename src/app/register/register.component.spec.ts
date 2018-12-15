@@ -1,14 +1,23 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RegisterComponent } from './register.component';
+import { MatCardModule, MatFormFieldModule, MatProgressSpinnerModule } from '@angular/material';
+import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
-describe('RegisterComponent', () => {
+fdescribe('RegisterComponent', () => {
   let component: RegisterComponent;
   let fixture: ComponentFixture<RegisterComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RegisterComponent ]
+      declarations: [ RegisterComponent ],
+      imports: [
+        MatCardModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatProgressSpinnerModule
+      ]
     })
     .compileComponents();
   }));
