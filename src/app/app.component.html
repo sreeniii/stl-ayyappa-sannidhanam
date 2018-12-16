@@ -9,6 +9,9 @@
     </button>
     <span>stl-ayyappa-sannidhanam</span>
     <div class="flex-spacer"></div>
+    <button *ngIf="userAuthenticated" mat-icon-button [matMenuTriggerFor]="notifications" class="float-right">
+      <mat-icon matBadge="22" matBadgeSize="small" matBadgeColor="warn" matBadgePosition="above after">notifications</mat-icon>
+    </button>
     <button *ngIf="userAuthenticated" mat-icon-button [matMenuTriggerFor]="appMenu" class="float-right">
       <mat-icon>person</mat-icon>
     </button>
@@ -28,9 +31,11 @@
 
   <mat-menu #appMenu="matMenu">
     <ng-template matMenuContent>
+      <mat-toolbar>
+        <mat-icon class="profile">account_circle</mat-icon>&nbsp;&nbsp;
+        <span class="profile-name">Sreenivas Kanthamneni</span>
+      </mat-toolbar>
       <mat-list>
-        <mat-list-item>Sreenivas Kanthamneni</mat-list-item>
-        <mat-divider></mat-divider>
         <mat-list-item>
             <button mat-menu-item routerLink="/profile">Profile</button>
         </mat-list-item>
@@ -38,6 +43,22 @@
             <button mat-menu-item (click)="logout()">Logout</button>
         </mat-list-item>
       </mat-list>
+    </ng-template>
+  </mat-menu>
+
+  <mat-menu #notifications="matMenu">
+    <ng-template matMenuContent>
+      <div>
+        <mat-toolbar>
+          <span>Notifications</span>
+          <div class="flex-spacer"></div>
+          <button mat-icon-button class="float-right">
+            <mat-icon>clear_all</mat-icon>
+          </button>
+        </mat-toolbar>
+        <mat-divider></mat-divider>
+        <div class="notifications-container">All caught up.</div>
+      </div>
     </ng-template>
   </mat-menu>
 

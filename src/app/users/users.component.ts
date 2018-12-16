@@ -3,9 +3,6 @@ import { UserService } from '../services/user.service';
 import { User } from '../models/user';
 import { first } from 'rxjs/operators';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
-import { DataGridDataSource } from '../data-grid/data-grid-datasource';
-import { DataSource } from '@angular/cdk/table';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-users',

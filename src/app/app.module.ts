@@ -12,9 +12,8 @@ import { MatToolbarModule, MatButtonModule,
   MatSidenavModule, MatIconModule,
   MatListModule, MatGridListModule, MatCardModule,
   MatMenuModule, MatTableModule, MatPaginatorModule,
-  MatSortModule, MatFormFieldModule, MatProgressSpinnerModule, MatInputModule } from '@angular/material';
+  MatSortModule, MatFormFieldModule, MatProgressSpinnerModule, MatInputModule, MatSnackBarModule, MatBadgeModule } from '@angular/material';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { DataGridComponent } from './data-grid/data-grid.component';
 import { EventsComponent } from './events/events.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
@@ -33,7 +32,6 @@ import { ProfileComponent } from './profile/profile.component';
     AppComponent,
     MenuComponent,
     DashboardComponent,
-    DataGridComponent,
     EventsComponent,
     RegisterComponent,
     LoginComponent,
@@ -64,6 +62,8 @@ import { ProfileComponent } from './profile/profile.component';
     MatFormFieldModule,
     MatProgressSpinnerModule,
     MatInputModule,
+    MatSnackBarModule,
+    MatBadgeModule,
     FlexLayoutModule
   ],
   providers: [

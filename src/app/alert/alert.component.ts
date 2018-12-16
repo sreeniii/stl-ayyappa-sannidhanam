@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AlertService } from '../services/alert.service';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-alert',
@@ -9,13 +10,17 @@ import { AlertService } from '../services/alert.service';
 })
 export class AlertComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
-  message: any;
+//   message: any;
 
-  constructor(private alertService: AlertService) { }
+  constructor(private alertService: AlertService, public snackBar: MatSnackBar) { }
 
   ngOnInit() {
       this.subscription = this.alertService.getMessage().subscribe(message => {
-          this.message = message;
+        if (message != null) {
+            this.snackBar.open(message.text, message.type, {
+                duration: 5000,
+            });
+        }
       });
   }
 

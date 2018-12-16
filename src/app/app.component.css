@@ -30,3 +30,16 @@
 .flex-spacer {
     flex-grow: 1;
 }
+
+.notifications-container {
+    width: 260px;
+    margin: 10px;
+}
+
+.profile {
+    font-size: 30px;
+}
+
+.profile-name {
+    font-size: 20px;
+}
