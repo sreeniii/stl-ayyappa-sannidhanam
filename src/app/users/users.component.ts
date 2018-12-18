@@ -14,7 +14,7 @@ export class UsersComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['id', 'username', 'firstName', 'lastName'];
+  displayedColumns = ['id', 'username', 'firstName', 'lastName', 'isAdmin', 'actions'];
   dataSource: MatTableDataSource<User>;
   isLoadingResults = true;
 
@@ -26,6 +26,12 @@ export class UsersComponent implements OnInit {
 
   deleteUser(id: number) {
     this.userService.delete(id).pipe(first()).subscribe(() => {
+        this.loadAllUsers();
+    });
+  }
+
+  toggleAdminRights(id: number, status: boolean) {
+    this.userService.toggleAdminRights(id, status).pipe(first()).subscribe(() => {
         this.loadAllUsers();
     });
   }

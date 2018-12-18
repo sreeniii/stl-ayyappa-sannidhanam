@@ -9,10 +9,10 @@
     </button>
     <span>stl-ayyappa-sannidhanam</span>
     <div class="flex-spacer"></div>
-    <button *ngIf="userAuthenticated" mat-icon-button [matMenuTriggerFor]="notifications" class="float-right">
+    <button *ngIf="userInfo" mat-icon-button [matMenuTriggerFor]="notifications" class="float-right">
       <mat-icon matBadge="22" matBadgeSize="small" matBadgeColor="warn" matBadgePosition="above after">notifications</mat-icon>
     </button>
-    <button *ngIf="userAuthenticated" mat-icon-button [matMenuTriggerFor]="appMenu" class="float-right">
+    <button *ngIf="userInfo" mat-icon-button [matMenuTriggerFor]="appMenu" class="float-right">
       <mat-icon>person</mat-icon>
     </button>
   </mat-toolbar>
@@ -33,7 +33,7 @@
     <ng-template matMenuContent>
       <mat-toolbar>
         <mat-icon class="profile">account_circle</mat-icon>&nbsp;&nbsp;
-        <span class="profile-name">Sreenivas Kanthamneni</span>
+        <span class="profile-name" *ngIf="userInfo">{{userInfo.firstName}} {{userInfo.lastName}}</span>
       </mat-toolbar>
       <mat-list>
         <mat-list-item>

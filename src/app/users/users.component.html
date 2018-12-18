@@ -34,6 +34,40 @@
         <td mat-cell *matCellDef="let row">{{row.lastName}}</td>
       </ng-container>
 
+      <ng-container matColumnDef="isAdmin">
+        <th mat-header-cell *matHeaderCellDef>Admin</th>
+        <td mat-cell *matCellDef="let row">
+            <mat-icon *ngIf="row.isAdmin">check</mat-icon>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let row">
+          <button mat-icon-button [matMenuTriggerFor]="appMenu" class="float-right">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #appMenu="matMenu">
+              <ng-template matMenuContent>
+                <mat-list>
+                  <mat-list-item>
+                      <button mat-menu-item (click)="toggleAdminRights(row.id, !row.isAdmin)">
+                        <span *ngIf="!row.isAdmin">Mark as Admin</span>
+                        <span *ngIf="row.isAdmin">Revoke Admin rights</span>
+                      </button>
+                  </mat-list-item>
+                  <mat-list-item>
+                      <button mat-menu-item (click)="deleteUser(row.id)">Delete</button>
+                  </mat-list-item>
+                  <mat-list-item>
+                      <button mat-menu-item routerLink="/profile/{{row.id}}">Edit</button>
+                  </mat-list-item>
+                </mat-list>
+              </ng-template>
+            </mat-menu>
+        </td>
+      </ng-container>
+
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthenticationService } from '../services/authentication.service';
+import { CurrentUser } from '../models/user';
 
 @Component({
   selector: 'app-menu',
@@ -7,9 +8,9 @@ import { AuthenticationService } from '../services/authentication.service';
   styleUrls: ['./menu.component.css'],
 })
 export class MenuComponent {
-  userAuthenticated = false;
+  userInfo: CurrentUser;
 
   constructor(private authenticationService: AuthenticationService) {
-    this.authenticationService.currentToken.subscribe(x => this.userAuthenticated = (x != null));
+    this.authenticationService.currentUser.subscribe(x => this.userInfo = x);
   }
 }

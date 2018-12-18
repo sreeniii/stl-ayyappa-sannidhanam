@@ -2,25 +2,26 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { TOKEN_AUTH_USERNAME, TOKEN_AUTH_PASSWORD } from './auth.constants';
+import { TOKEN_AUTH_USERNAME, TOKEN_AUTH_PASSWORD, TOKEN_NAME } from './auth.constants';
 import { environment } from 'src/environments/environment';
+import { User, CurrentUser } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
-  private currentTokenSubject: BehaviorSubject<string>;
-  public currentToken: Observable<string>;
+  private currentUserSubject: BehaviorSubject<CurrentUser>;
+  public currentUser: Observable<CurrentUser>;
 
   constructor(private http: HttpClient) {
-      this.currentTokenSubject = new BehaviorSubject<string>(JSON.parse(localStorage.getItem('access_token')));
-      this.currentToken = this.currentTokenSubject.asObservable();
+      this.currentUserSubject = new BehaviorSubject<CurrentUser>(JSON.parse(localStorage.getItem('current_user')));
+      this.currentUser = this.currentUserSubject.asObservable();
   }
 
   apiUrl: string = environment.apiBaseUrl;
 
-  public get currentTokenValue(): string {
-      return this.currentTokenSubject.value;
+  public get currentUserValue(): CurrentUser {
+      return this.currentUserSubject.value;
   }
 
   login(username: string, password: string) {
@@ -32,10 +33,10 @@ export class AuthenticationService {
       return this.http.post<any>(this.apiUrl + `/oauth/token`, body, { headers: headers })
           .pipe(map(user => {
               // login successful if there's a jwt token in the response
-              if (user && user.access_token) {
+              if (user && user[TOKEN_NAME]) {
                   // store user details and jwt token in local storage to keep user logged in between page refreshes
-                  localStorage.setItem('access_token', JSON.stringify(user.access_token));
-                  this.currentTokenSubject.next(user.access_token);
+                  localStorage.setItem('current_user', JSON.stringify(user));
+                  this.currentUserSubject.next(user);
               }
 
               return user;
@@ -44,7 +45,7 @@ export class AuthenticationService {
 
   logout() {
       // remove user from local storage to log user out
-      localStorage.removeItem('access_token');
-      this.currentTokenSubject.next(null);
+      localStorage.removeItem('current_user');
+      this.currentUserSubject.next(null);
   }
 }

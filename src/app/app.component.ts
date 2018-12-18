@@ -4,6 +4,7 @@ import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { AuthenticationService } from './services/authentication.service';
+import { User, CurrentUser } from './models/user';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,7 @@ import { AuthenticationService } from './services/authentication.service';
 })
 export class AppComponent {
   title = 'stl-ayyappa-sannidhanam';
-  userAuthenticated = false;
+  userInfo: CurrentUser;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -22,7 +23,7 @@ export class AppComponent {
   constructor(private breakpointObserver: BreakpointObserver,
     private router: Router,
     private authenticationService: AuthenticationService) {
-    this.authenticationService.currentToken.subscribe(x => this.userAuthenticated = (x != null));
+    this.authenticationService.currentUser.subscribe(x => this.userInfo = x);
   }
 
   logout() {
