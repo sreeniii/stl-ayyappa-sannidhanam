@@ -2,7 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { User } from '../models/user';
 import { first } from 'rxjs/operators';
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource, MatDialog } from '@angular/material';
+import { UserDeleteConfirmDialogComponent } from './user-delete-confirm-dialog/user-delete-confirm-dialog.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-users',
@@ -14,20 +16,35 @@ export class UsersComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['id', 'username', 'firstName', 'lastName', 'isAdmin', 'actions'];
+  displayedColumns = ['firstName', 'lastName', 'isAdmin', 'actions'];
   dataSource: MatTableDataSource<User>;
   isLoadingResults = true;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService,
+    public dialog: MatDialog,
+    private router: Router) { }
 
   ngOnInit() {
     this.loadAllUsers();
   }
 
-  deleteUser(id: number) {
-    this.userService.delete(id).pipe(first()).subscribe(() => {
-        this.loadAllUsers();
+  deleteUser(user: User) {
+    const dialogRef = this.dialog.open(UserDeleteConfirmDialogComponent, {
+      width: '250px',
+      data: user
     });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.userService.delete(user.id).pipe(first()).subscribe(() => {
+            this.loadAllUsers();
+        });
+      }
+    });
+  }
+
+  editUser(user: User) {
+    this.router.navigate(['/profile'], { queryParams: { id: user.id, editMode: true } });
   }
 
   toggleAdminRights(id: number, status: boolean) {

@@ -14,6 +14,7 @@ export class UpdateProfile {
 
 
 export class CurrentUser {
+    id: number;
     firstName: string;
     lastName: string;
     isAdmin: boolean;

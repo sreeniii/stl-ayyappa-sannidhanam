@@ -13,7 +13,7 @@ import { MatToolbarModule, MatButtonModule,
   MatListModule, MatGridListModule, MatCardModule,
   MatMenuModule, MatTableModule, MatPaginatorModule,
   MatSortModule, MatFormFieldModule, MatProgressSpinnerModule,
-  MatInputModule, MatSnackBarModule, MatBadgeModule, MatCheckboxModule } from '@angular/material';
+  MatInputModule, MatSnackBarModule, MatBadgeModule, MatCheckboxModule, MatDialogModule } from '@angular/material';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { EventsComponent } from './events/events.component';
 import { RegisterComponent } from './register/register.component';
@@ -27,8 +27,12 @@ import { UsersComponent } from './users/users.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import { AboutusComponent } from './aboutus/aboutus.component';
 import { ProfileComponent } from './profile/profile.component';
+import { UserDeleteConfirmDialogComponent } from './users/user-delete-confirm-dialog/user-delete-confirm-dialog.component';
 
 @NgModule({
+  entryComponents: [
+    UserDeleteConfirmDialogComponent
+  ],
   declarations: [
     AppComponent,
     MenuComponent,
@@ -39,7 +43,8 @@ import { ProfileComponent } from './profile/profile.component';
     AlertComponent,
     UsersComponent,
     AboutusComponent,
-    ProfileComponent
+    ProfileComponent,
+    UserDeleteConfirmDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -66,6 +71,7 @@ import { ProfileComponent } from './profile/profile.component';
     MatSnackBarModule,
     MatBadgeModule,
     MatCheckboxModule,
+    MatDialogModule,
     FlexLayoutModule
   ],
   providers: [
