@@ -1,5 +1,5 @@
 ﻿export class User {
-    id: number;
+    userId: string;
     username: string;
     password: string;
     firstName: string;
@@ -14,7 +14,7 @@ export class UpdateProfile {
 
 
 export class CurrentUser {
-    id: number;
+    userId: string;
     firstName: string;
     lastName: string;
     isAdmin: boolean;

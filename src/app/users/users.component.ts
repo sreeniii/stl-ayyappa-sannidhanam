@@ -36,7 +36,7 @@ export class UsersComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.userService.delete(user.id).pipe(first()).subscribe(() => {
+        this.userService.delete(user.userId).pipe(first()).subscribe(() => {
             this.loadAllUsers();
         });
       }
@@ -44,10 +44,11 @@ export class UsersComponent implements OnInit {
   }
 
   editUser(user: User) {
-    this.router.navigate(['/profile'], { queryParams: { id: user.id, editMode: true } });
+    console.log(user);
+    this.router.navigate(['/profile'], { queryParams: { id: user.userId, editMode: true } });
   }
 
-  toggleAdminRights(id: number, status: boolean) {
+  toggleAdminRights(id: string, status: boolean) {
     this.userService.toggleAdminRights(id, status).pipe(first()).subscribe(() => {
         this.loadAllUsers();
     });

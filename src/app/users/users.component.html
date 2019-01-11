@@ -49,7 +49,7 @@
               <ng-template matMenuContent>
                 <mat-list>
                   <mat-list-item>
-                      <button mat-menu-item (click)="toggleAdminRights(row.id, !row.isAdmin)">
+                      <button mat-menu-item (click)="toggleAdminRights(row.userId, !row.isAdmin)">
                         <span *ngIf="!row.isAdmin">Mark as Admin</span>
                         <span *ngIf="row.isAdmin">Revoke Admin rights</span>
                       </button>

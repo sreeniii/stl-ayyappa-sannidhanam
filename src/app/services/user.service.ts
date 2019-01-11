@@ -15,7 +15,7 @@ export class UserService {
         return this.http.get<User[]>(this.apiUrl + `/users`);
     }
 
-    getById(id: number): Observable<User> {
+    getById(id: string): Observable<User> {
         return this.http.get<User>(this.apiUrl + `/users/${id}`);
     }
 
@@ -23,15 +23,15 @@ export class UserService {
         return this.http.post(this.apiUrl + `/users/register`, user);
     }
 
-    update(id: number, user: UpdateProfile) {
+    update(id: string, user: UpdateProfile) {
         return this.http.put(this.apiUrl + `/users/${id}`, user);
     }
 
-    delete(id: number) {
+    delete(id: string) {
         return this.http.delete(this.apiUrl + `/users/${id}`);
     }
 
-    toggleAdminRights(id: number, status: boolean) {
+    toggleAdminRights(id: string, status: boolean) {
         return this.http.patch(this.apiUrl + `/users/${id}/admin/${status}`, null);
     }
 }

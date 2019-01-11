@@ -16,7 +16,7 @@ import { AuthenticationService } from '../services/authentication.service';
 export class ProfileComponent implements OnInit, OnDestroy {
   profileForm: FormGroup;
   private subscription: Subscription;
-  userId: number;
+  userId: string;
   editMode: boolean;
   user: User;
   loading = false;
@@ -39,7 +39,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
     this.subscription = this.route.queryParams.subscribe(params => {
       this.editMode = params['editMode'] || false;
-      this.userId = params['id'] || this.currentUser.id;
+      this.userId = params['id'] || this.currentUser.userId;
       this.userService.getById(this.userId).subscribe(user => {
         this.user = user;
         this.profileForm.patchValue(this.user);
