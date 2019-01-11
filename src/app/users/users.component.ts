@@ -16,7 +16,7 @@ export class UsersComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['firstName', 'lastName', 'isAdmin', 'actions'];
+  displayedColumns = ['username', 'firstName', 'lastName', 'isAdmin', 'actions'];
   dataSource: MatTableDataSource<User>;
   isLoadingResults = true;
 
@@ -44,7 +44,6 @@ export class UsersComponent implements OnInit {
   }
 
   editUser(user: User) {
-    console.log(user);
     this.router.navigate(['/profile'], { queryParams: { id: user.userId, editMode: true } });
   }
 
